@@ -1,0 +1,78 @@
+﻿<UserControl x:Class="Main.View.RoomsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:vm="clr-namespace:Main.ViewModel"
+             xmlns:v="clr-namespace:Main.View"
+             xmlns:searchViewModels="clr-namespace:Main.ViewModel.SearchViewModels"
+             xmlns:editViewModels="clr-namespace:Main.ViewModel.EditViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="470" d:DesignWidth="740">
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type editViewModels:RoomsEditViewModel}">
+            <v:RoomsEditView></v:RoomsEditView>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type searchViewModels:RoomsSearchViewModel}">
+            <v:SearchView></v:SearchView>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="9*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+<!-- Header Filter -->
+        <ContentControl Grid.Row="0" Grid.Column="0"
+                        Content="{Binding Path=RoomsSearchViewModelInstance}"></ContentControl>
+        <!-- Main DataGrid -->
+        <Grid Grid.Row="1">
+            <Grid.Effect>
+                <DropShadowEffect Color="#FFCBCBCB" Direction="250" BlurRadius="17"/>
+            </Grid.Effect>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="10*"/>
+            </Grid.RowDefinitions>
+            <Border Background="#FF4EB0FF" BorderThickness="0">
+                <TextBlock Text="Список номеров гостинницы" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Sergoe UI" FontSize="18" FontStretch="Condensed" Foreground="White"/>
+            </Border>
+            <ListView Name="ListView" Margin="0" Grid.Row="1" 
+                      ItemsSource="{Binding Path=Collection}" 
+                      BorderThickness="0" 
+                      BorderBrush="{x:Null}" SelectedItem="{Binding Path= CurrentEntityObject}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Номер" DisplayMemberBinding="{Binding Path=RoomNum}"></GridViewColumn>
+                        <GridViewColumn Header="Количество мест" DisplayMemberBinding="{Binding Path=NumberOfPlaces}"></GridViewColumn>
+                        <GridViewColumn Header="Стоимость" DisplayMemberBinding="{Binding Path=CostPerDay}"></GridViewColumn>
+                        <GridViewColumn Header="Тип номера" DisplayMemberBinding="{Binding Path=TypesOfRooms.Type}" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
+        </Grid>
+        <!-- Helper -->
+        <ContentControl Grid.RowSpan="3" Grid.Column="1" Content="{Binding Path=EditViewModelInstance}"></ContentControl>
+        
+        <!-- Footer -->
+        <Grid Grid.Row="2" Background="#FF4EB0FF">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Button Margin="5" IsEnabled="{Binding Path=IsAddAndEditButtonsEnabled}" Command="{Binding Path=AddClickedCommand}" Style="{DynamicResource AddButtonStyle}">Добавить</Button>
+            <Button Margin="5" IsEnabled="{Binding Path=IsAddAndEditButtonsEnabled}" Command ="{Binding Path=EditClickedCommand}" Grid.Column="1" Style="{DynamicResource EditButton}">Измененить</Button>
+            <Button Margin="5" IsEnabled="{Binding Path=IsAddAndEditButtonsEnabled}" Command ="{Binding Path=DeleteClickedCommand}" Grid.Column="2" Style="{DynamicResource DeleteButtonStyle}">Удалить</Button>
+        </Grid>
+      
+    </Grid>
+</UserControl>

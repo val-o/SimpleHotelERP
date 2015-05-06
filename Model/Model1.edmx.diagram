@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ae4196f152fb4bd38a6fbbe25a9f9048" Name="Diagram1">
+        <EntityTypeShape EntityType="BaseModel.Discounts" Width="1.5" PointX="3" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BaseModel.Guests" Width="1.5" PointX="0.75" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BaseModel.GuestsDiscounts" Width="1.5" PointX="5.25" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BaseModel.Hotels" Width="1.5" PointX="0.75" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="BaseModel.Payment" Width="1.5" PointX="6" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BaseModel.Registration" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BaseModel.Rooms" Width="1.5" PointX="3" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="BaseModel.ServiceRealization" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BaseModel.Services" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BaseModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BaseModel.TypesOfRooms" Width="1.5" PointX="0.75" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BaseModel.Wishes" Width="1.5" PointX="6" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BaseModel.FreeRoomsView" Width="1.5" PointX="7.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BaseModel.GuestsServicesTotalCostsView" Width="1.5" PointX="8.75" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BaseModel.GuestsTotalDebt" Width="1.5" PointX="8.75" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BaseModel.PaymentsView" Width="1.5" PointX="9.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BaseModel.RegistrationView" Width="1.5" PointX="8.75" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BaseModel.RoomsView" Width="1.5" PointX="10.75" PointY="4.875" IsExpanded="true" />
+        <AssociationConnector Association="BaseModel.FK_Discounts_Hotels" ManuallyRouted="false" />
+        <AssociationConnector Association="BaseModel.FK_GuestsDiscounts_Discounts" ManuallyRouted="false" />
+        <AssociationConnector Association="BaseModel.FK_GuestsDiscounts_Guests" ManuallyRouted="false" />
+        <AssociationConnector Association="BaseModel.FK_Payment_Payment" ManuallyRouted="false" />
+        <AssociationConnector Association="BaseModel.FK_Registration_Guests" ManuallyRouted="false" />
+        <AssociationConnector Association="BaseModel.FK_ServiceRealization_Guests" ManuallyRouted="false" />
+        <AssociationConnector Association="BaseModel.FK_Wishes_Guests" ManuallyRouted="false" />
+        <AssociationConnector Association="BaseModel.FK_Payment_Hotels" ManuallyRouted="false" />
+        <AssociationConnector Association="BaseModel.FK_Registration_Hotels" ManuallyRouted="false" />
+        <AssociationConnector Association="BaseModel.FK_Rooms_Hotels" ManuallyRouted="false" />
+        <AssociationConnector Association="BaseModel.FK_Wishes_Hotels" ManuallyRouted="false" />
+        <AssociationConnector Association="BaseModel.FK_Registration_Rooms" ManuallyRouted="false" />
+        <AssociationConnector Association="BaseModel.FK_Rooms_TypesOfRooms" ManuallyRouted="false" />
+        <AssociationConnector Association="BaseModel.FK_ServiceRealization_Services" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

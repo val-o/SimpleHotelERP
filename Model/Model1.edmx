@@ -1,0 +1,1208 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="BaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Discounts">
+          <Key>
+            <PropertyRef Name="DiscountID" />
+          </Key>
+          <Property Name="DiscountID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DiscountTitle" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="DiscountSize" Type="int" Nullable="false" />
+          <Property Name="HotelID" Type="int" />
+        </EntityType>
+        <EntityType Name="Guests">
+          <Key>
+            <PropertyRef Name="GuestID" />
+          </Key>
+          <Property Name="GuestID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="20" />
+          <Property Name="SecName" Type="varchar" MaxLength="20" />
+          <Property Name="ThirdName" Type="varchar" MaxLength="20" />
+          <Property Name="Address" Type="varchar" MaxLength="40" />
+          <Property Name="PassportData" Type="varchar" MaxLength="40" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="20" />
+          <Property Name="BirthDate" Type="date" />
+        </EntityType>
+        <EntityType Name="GuestsDiscounts">
+          <Key>
+            <PropertyRef Name="GuestsDisocuntsID" />
+          </Key>
+          <Property Name="GuestsDisocuntsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DiscountID" Type="int" Nullable="false" />
+          <Property Name="GuestID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Hotels">
+          <Key>
+            <PropertyRef Name="HotelID" />
+          </Key>
+          <Property Name="HotelID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HotelName" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="HotelRating" Type="int" Nullable="false" />
+          <Property Name="HotelAddress" Type="varchar" MaxLength="40" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Payment">
+          <Key>
+            <PropertyRef Name="PaymentID" />
+          </Key>
+          <Property Name="PaymentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PaymentSize" Type="float" Nullable="false" />
+          <Property Name="PaymentDate" Type="datetime" Nullable="false" />
+          <Property Name="GuestID" Type="int" Nullable="false" />
+          <Property Name="HotelID" Type="int" Nullable="false" />
+          <Property Name="PaymentComment" Type="text" />
+        </EntityType>
+        <EntityType Name="Registration">
+          <Key>
+            <PropertyRef Name="RegistrationID" />
+          </Key>
+          <Property Name="RegistrationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GuestID" Type="int" />
+          <Property Name="RoomID" Type="int" />
+          <Property Name="EntryDate" Type="datetime" />
+          <Property Name="ExitDate" Type="datetime" />
+          <Property Name="HotelID" Type="int" />
+        </EntityType>
+        <EntityType Name="Rooms">
+          <Key>
+            <PropertyRef Name="RoomID" />
+          </Key>
+          <Property Name="RoomID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoomNum" Type="varchar" MaxLength="4" />
+          <Property Name="NumberOfPlaces" Type="tinyint" />
+          <Property Name="TypeID" Type="int" />
+          <Property Name="CostPerDay" Type="int" />
+          <Property Name="HotelID" Type="int" />
+        </EntityType>
+        <EntityType Name="ServiceRealization">
+          <Key>
+            <PropertyRef Name="RealizationID" />
+          </Key>
+          <Property Name="RealizationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RealizationDate" Type="datetime" Nullable="false" />
+          <Property Name="GuestID" Type="int" Nullable="false" />
+          <Property Name="ServiceID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Services">
+          <Key>
+            <PropertyRef Name="ServiceID" />
+          </Key>
+          <Property Name="ServiceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ServiceTitle" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="ServiceCost" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TypesOfRooms">
+          <Key>
+            <PropertyRef Name="TypeID" />
+          </Key>
+          <Property Name="TypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Wishes">
+          <Key>
+            <PropertyRef Name="WishID" />
+          </Key>
+          <Property Name="WishID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WishContent" Type="text" Nullable="false" />
+          <Property Name="GuestID" Type="int" />
+          <Property Name="HotelID" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'Base.dbo.BusyRoomsView' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="BusyRoomsView">
+          <Property Name="RoomNum" Type="varchar" MaxLength="4" />
+          <Property Name="RoomID" Type="int" />
+          <Property Name="GuestID" Type="int" />
+          <Property Name="EntryDate" Type="datetime" />
+          <Property Name="SecName" Type="varchar" MaxLength="20" />
+          <Property Name="ExitDate" Type="datetime" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Base.dbo.FreeRoomsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="FreeRoomsView">
+          <Key>
+            <PropertyRef Name="RoomID" />
+          </Key>
+          <Property Name="RoomID" Type="int" Nullable="false" />
+          <Property Name="RoomNum" Type="varchar" MaxLength="4" />
+          <Property Name="NumberOfPlaces" Type="tinyint" />
+          <Property Name="CostPerDay" Type="int" />
+          <Property Name="Type" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Base.dbo.GuestsServicesTotalCostsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="GuestsServicesTotalCostsView">
+          <Key>
+            <PropertyRef Name="GuestID" />
+          </Key>
+          <Property Name="GuestID" Type="int" Nullable="false" />
+          <Property Name="ServicesTotalCost" Type="float" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Base.dbo.GuestsTotalDebt' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="GuestsTotalDebt">
+          <Key>
+            <PropertyRef Name="GuestID" />
+          </Key>
+          <Property Name="GuestID" Type="int" Nullable="false" />
+          <Property Name="ServicesTotalCost" Type="float" />
+          <Property Name="RentCost" Type="int" />
+          <Property Name="TotalDebt" Type="float" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'Base.dbo.GuestsView' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="GuestsView">
+          <Property Name="Name" Type="varchar" MaxLength="20" />
+          <Property Name="SecName" Type="varchar" MaxLength="20" />
+          <Property Name="TotalCost" Type="int" />
+          <Property Name="ServiceID" Type="int" />
+          <Property Name="ServiceCost" Type="float" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Base.dbo.PaymentsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="PaymentsView">
+          <Key>
+            <PropertyRef Name="GuestID" />
+          </Key>
+          <Property Name="GuestID" Type="int" Nullable="false" />
+          <Property Name="ServicesTotalCost" Type="float" />
+          <Property Name="RentCost" Type="int" />
+          <Property Name="TotalDebt" Type="float" />
+          <Property Name="Debt" Type="float" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Base.dbo.RegistrationView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="RegistrationView">
+          <Key>
+            <PropertyRef Name="RegistrationID" />
+          </Key>
+          <Property Name="Name" Type="varchar" MaxLength="20" />
+          <Property Name="SecName" Type="varchar" MaxLength="20" />
+          <Property Name="ThirdName" Type="varchar" MaxLength="20" />
+          <Property Name="RoomNum" Type="varchar" MaxLength="4" />
+          <Property Name="NumberOfPlaces" Type="tinyint" />
+          <Property Name="CostPerDay" Type="int" />
+          <Property Name="Type" Type="varchar" MaxLength="20" />
+          <Property Name="EntryDate" Type="datetime" />
+          <Property Name="ExitDate" Type="datetime" />
+          <Property Name="RegistrationID" Type="int" Nullable="false" />
+          <Property Name="RoomID" Type="int" />
+          <Property Name="GuestID" Type="int" />
+          <Property Name="DaysCount" Type="int" />
+          <Property Name="DiscountID" Type="int" />
+          <Property Name="DiscountTitle" Type="varchar" MaxLength="30" />
+          <Property Name="TotalCost" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Base.dbo.RoomsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="RoomsView">
+          <Key>
+            <PropertyRef Name="RoomID" />
+          </Key>
+          <Property Name="RoomNum" Type="varchar" MaxLength="4" />
+          <Property Name="RoomID" Type="int" Nullable="false" />
+          <Property Name="NumberOfPlaces" Type="tinyint" />
+          <Property Name="CostPerDay" Type="int" />
+          <Property Name="Type" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <Association Name="FK_Discounts_Hotels">
+          <End Role="Hotels" Type="Self.Hotels" Multiplicity="0..1" />
+          <End Role="Discounts" Type="Self.Discounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hotels">
+              <PropertyRef Name="HotelID" />
+            </Principal>
+            <Dependent Role="Discounts">
+              <PropertyRef Name="HotelID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GuestsDiscounts_Discounts">
+          <End Role="Discounts" Type="Self.Discounts" Multiplicity="1" />
+          <End Role="GuestsDiscounts" Type="Self.GuestsDiscounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Discounts">
+              <PropertyRef Name="DiscountID" />
+            </Principal>
+            <Dependent Role="GuestsDiscounts">
+              <PropertyRef Name="DiscountID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GuestsDiscounts_Guests">
+          <End Role="Guests" Type="Self.Guests" Multiplicity="1" />
+          <End Role="GuestsDiscounts" Type="Self.GuestsDiscounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Guests">
+              <PropertyRef Name="GuestID" />
+            </Principal>
+            <Dependent Role="GuestsDiscounts">
+              <PropertyRef Name="GuestID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payment_Hotels">
+          <End Role="Hotels" Type="Self.Hotels" Multiplicity="1" />
+          <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hotels">
+              <PropertyRef Name="HotelID" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="HotelID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payment_Payment">
+          <End Role="Guests" Type="Self.Guests" Multiplicity="1" />
+          <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Guests">
+              <PropertyRef Name="GuestID" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="GuestID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Registration_Guests">
+          <End Role="Guests" Type="Self.Guests" Multiplicity="0..1" />
+          <End Role="Registration" Type="Self.Registration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Guests">
+              <PropertyRef Name="GuestID" />
+            </Principal>
+            <Dependent Role="Registration">
+              <PropertyRef Name="GuestID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Registration_Hotels">
+          <End Role="Hotels" Type="Self.Hotels" Multiplicity="0..1" />
+          <End Role="Registration" Type="Self.Registration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hotels">
+              <PropertyRef Name="HotelID" />
+            </Principal>
+            <Dependent Role="Registration">
+              <PropertyRef Name="HotelID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Registration_Rooms">
+          <End Role="Rooms" Type="Self.Rooms" Multiplicity="0..1" />
+          <End Role="Registration" Type="Self.Registration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rooms">
+              <PropertyRef Name="RoomID" />
+            </Principal>
+            <Dependent Role="Registration">
+              <PropertyRef Name="RoomID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rooms_Hotels">
+          <End Role="Hotels" Type="Self.Hotels" Multiplicity="0..1" />
+          <End Role="Rooms" Type="Self.Rooms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hotels">
+              <PropertyRef Name="HotelID" />
+            </Principal>
+            <Dependent Role="Rooms">
+              <PropertyRef Name="HotelID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rooms_TypesOfRooms">
+          <End Role="TypesOfRooms" Type="Self.TypesOfRooms" Multiplicity="0..1" />
+          <End Role="Rooms" Type="Self.Rooms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypesOfRooms">
+              <PropertyRef Name="TypeID" />
+            </Principal>
+            <Dependent Role="Rooms">
+              <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServiceRealization_Guests">
+          <End Role="Guests" Type="Self.Guests" Multiplicity="1" />
+          <End Role="ServiceRealization" Type="Self.ServiceRealization" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Guests">
+              <PropertyRef Name="GuestID" />
+            </Principal>
+            <Dependent Role="ServiceRealization">
+              <PropertyRef Name="GuestID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServiceRealization_Services">
+          <End Role="Services" Type="Self.Services" Multiplicity="1" />
+          <End Role="ServiceRealization" Type="Self.ServiceRealization" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Services">
+              <PropertyRef Name="ServiceID" />
+            </Principal>
+            <Dependent Role="ServiceRealization">
+              <PropertyRef Name="ServiceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Wishes_Guests">
+          <End Role="Guests" Type="Self.Guests" Multiplicity="0..1" />
+          <End Role="Wishes" Type="Self.Wishes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Guests">
+              <PropertyRef Name="GuestID" />
+            </Principal>
+            <Dependent Role="Wishes">
+              <PropertyRef Name="GuestID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Wishes_Hotels">
+          <End Role="Hotels" Type="Self.Hotels" Multiplicity="1" />
+          <End Role="Wishes" Type="Self.Wishes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hotels">
+              <PropertyRef Name="HotelID" />
+            </Principal>
+            <Dependent Role="Wishes">
+              <PropertyRef Name="HotelID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BaseModelStoreContainer">
+          <EntitySet Name="Discounts" EntityType="Self.Discounts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Guests" EntityType="Self.Guests" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GuestsDiscounts" EntityType="Self.GuestsDiscounts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Hotels" EntityType="Self.Hotels" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Payment" EntityType="Self.Payment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Registration" EntityType="Self.Registration" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rooms" EntityType="Self.Rooms" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ServiceRealization" EntityType="Self.ServiceRealization" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Services" EntityType="Self.Services" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypesOfRooms" EntityType="Self.TypesOfRooms" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Wishes" EntityType="Self.Wishes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FreeRoomsView" EntityType="Self.FreeRoomsView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [FreeRoomsView].[RoomID] AS [RoomID], 
+    [FreeRoomsView].[RoomNum] AS [RoomNum], 
+    [FreeRoomsView].[NumberOfPlaces] AS [NumberOfPlaces], 
+    [FreeRoomsView].[CostPerDay] AS [CostPerDay], 
+    [FreeRoomsView].[Type] AS [Type]
+    FROM [dbo].[FreeRoomsView] AS [FreeRoomsView]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="GuestsServicesTotalCostsView" EntityType="Self.GuestsServicesTotalCostsView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [GuestsServicesTotalCostsView].[GuestID] AS [GuestID], 
+    [GuestsServicesTotalCostsView].[ServicesTotalCost] AS [ServicesTotalCost]
+    FROM [dbo].[GuestsServicesTotalCostsView] AS [GuestsServicesTotalCostsView]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="GuestsTotalDebt" EntityType="Self.GuestsTotalDebt" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [GuestsTotalDebt].[GuestID] AS [GuestID], 
+    [GuestsTotalDebt].[ServicesTotalCost] AS [ServicesTotalCost], 
+    [GuestsTotalDebt].[RentCost] AS [RentCost], 
+    [GuestsTotalDebt].[TotalDebt] AS [TotalDebt]
+    FROM [dbo].[GuestsTotalDebt] AS [GuestsTotalDebt]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="PaymentsView" EntityType="Self.PaymentsView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [PaymentsView].[GuestID] AS [GuestID], 
+    [PaymentsView].[ServicesTotalCost] AS [ServicesTotalCost], 
+    [PaymentsView].[RentCost] AS [RentCost], 
+    [PaymentsView].[TotalDebt] AS [TotalDebt], 
+    [PaymentsView].[Debt] AS [Debt]
+    FROM [dbo].[PaymentsView] AS [PaymentsView]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="RegistrationView" EntityType="Self.RegistrationView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [RegistrationView].[Name] AS [Name], 
+    [RegistrationView].[SecName] AS [SecName], 
+    [RegistrationView].[ThirdName] AS [ThirdName], 
+    [RegistrationView].[RoomNum] AS [RoomNum], 
+    [RegistrationView].[NumberOfPlaces] AS [NumberOfPlaces], 
+    [RegistrationView].[CostPerDay] AS [CostPerDay], 
+    [RegistrationView].[Type] AS [Type], 
+    [RegistrationView].[EntryDate] AS [EntryDate], 
+    [RegistrationView].[ExitDate] AS [ExitDate], 
+    [RegistrationView].[RegistrationID] AS [RegistrationID], 
+    [RegistrationView].[RoomID] AS [RoomID], 
+    [RegistrationView].[GuestID] AS [GuestID], 
+    [RegistrationView].[DaysCount] AS [DaysCount], 
+    [RegistrationView].[DiscountID] AS [DiscountID], 
+    [RegistrationView].[DiscountTitle] AS [DiscountTitle], 
+    [RegistrationView].[TotalCost] AS [TotalCost]
+    FROM [dbo].[RegistrationView] AS [RegistrationView]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="RoomsView" EntityType="Self.RoomsView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [RoomsView].[RoomNum] AS [RoomNum], 
+    [RoomsView].[RoomID] AS [RoomID], 
+    [RoomsView].[NumberOfPlaces] AS [NumberOfPlaces], 
+    [RoomsView].[CostPerDay] AS [CostPerDay], 
+    [RoomsView].[Type] AS [Type]
+    FROM [dbo].[RoomsView] AS [RoomsView]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Discounts_Hotels" Association="Self.FK_Discounts_Hotels">
+            <End Role="Hotels" EntitySet="Hotels" />
+            <End Role="Discounts" EntitySet="Discounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GuestsDiscounts_Discounts" Association="Self.FK_GuestsDiscounts_Discounts">
+            <End Role="Discounts" EntitySet="Discounts" />
+            <End Role="GuestsDiscounts" EntitySet="GuestsDiscounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GuestsDiscounts_Guests" Association="Self.FK_GuestsDiscounts_Guests">
+            <End Role="Guests" EntitySet="Guests" />
+            <End Role="GuestsDiscounts" EntitySet="GuestsDiscounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payment_Hotels" Association="Self.FK_Payment_Hotels">
+            <End Role="Hotels" EntitySet="Hotels" />
+            <End Role="Payment" EntitySet="Payment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payment_Payment" Association="Self.FK_Payment_Payment">
+            <End Role="Guests" EntitySet="Guests" />
+            <End Role="Payment" EntitySet="Payment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Registration_Guests" Association="Self.FK_Registration_Guests">
+            <End Role="Guests" EntitySet="Guests" />
+            <End Role="Registration" EntitySet="Registration" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Registration_Hotels" Association="Self.FK_Registration_Hotels">
+            <End Role="Hotels" EntitySet="Hotels" />
+            <End Role="Registration" EntitySet="Registration" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Registration_Rooms" Association="Self.FK_Registration_Rooms">
+            <End Role="Rooms" EntitySet="Rooms" />
+            <End Role="Registration" EntitySet="Registration" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rooms_Hotels" Association="Self.FK_Rooms_Hotels">
+            <End Role="Hotels" EntitySet="Hotels" />
+            <End Role="Rooms" EntitySet="Rooms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rooms_TypesOfRooms" Association="Self.FK_Rooms_TypesOfRooms">
+            <End Role="TypesOfRooms" EntitySet="TypesOfRooms" />
+            <End Role="Rooms" EntitySet="Rooms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServiceRealization_Guests" Association="Self.FK_ServiceRealization_Guests">
+            <End Role="Guests" EntitySet="Guests" />
+            <End Role="ServiceRealization" EntitySet="ServiceRealization" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServiceRealization_Services" Association="Self.FK_ServiceRealization_Services">
+            <End Role="Services" EntitySet="Services" />
+            <End Role="ServiceRealization" EntitySet="ServiceRealization" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Wishes_Guests" Association="Self.FK_Wishes_Guests">
+            <End Role="Guests" EntitySet="Guests" />
+            <End Role="Wishes" EntitySet="Wishes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Wishes_Hotels" Association="Self.FK_Wishes_Hotels">
+            <End Role="Hotels" EntitySet="Hotels" />
+            <End Role="Wishes" EntitySet="Wishes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Discounts">
+          <Key>
+            <PropertyRef Name="DiscountID" />
+          </Key>
+          <Property Name="DiscountID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DiscountTitle" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DiscountSize" Type="Int32" Nullable="false" />
+          <Property Name="HotelID" Type="Int32" />
+          <NavigationProperty Name="Hotels" Relationship="Self.FK_Discounts_Hotels" FromRole="Discounts" ToRole="Hotels" />
+          <NavigationProperty Name="GuestsDiscounts" Relationship="Self.FK_GuestsDiscounts_Discounts" FromRole="Discounts" ToRole="GuestsDiscounts" />
+        </EntityType>
+        <EntityType Name="Guests">
+          <Key>
+            <PropertyRef Name="GuestID" />
+          </Key>
+          <Property Name="GuestID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="SecName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ThirdName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="PassportData" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="BirthDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="GuestsDiscounts" Relationship="Self.FK_GuestsDiscounts_Guests" FromRole="Guests" ToRole="GuestsDiscounts" />
+          <NavigationProperty Name="Payment" Relationship="Self.FK_Payment_Payment" FromRole="Guests" ToRole="Payment" />
+          <NavigationProperty Name="Registration" Relationship="Self.FK_Registration_Guests" FromRole="Guests" ToRole="Registration" />
+          <NavigationProperty Name="ServiceRealization" Relationship="Self.FK_ServiceRealization_Guests" FromRole="Guests" ToRole="ServiceRealization" />
+          <NavigationProperty Name="Wishes" Relationship="Self.FK_Wishes_Guests" FromRole="Guests" ToRole="Wishes" />
+        </EntityType>
+        <EntityType Name="GuestsDiscounts">
+          <Key>
+            <PropertyRef Name="GuestsDisocuntsID" />
+          </Key>
+          <Property Name="GuestsDisocuntsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DiscountID" Type="Int32" Nullable="false" />
+          <Property Name="GuestID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Discounts" Relationship="Self.FK_GuestsDiscounts_Discounts" FromRole="GuestsDiscounts" ToRole="Discounts" />
+          <NavigationProperty Name="Guests" Relationship="Self.FK_GuestsDiscounts_Guests" FromRole="GuestsDiscounts" ToRole="Guests" />
+        </EntityType>
+        <EntityType Name="Hotels">
+          <Key>
+            <PropertyRef Name="HotelID" />
+          </Key>
+          <Property Name="HotelID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HotelName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="HotelRating" Type="Int32" Nullable="false" />
+          <Property Name="HotelAddress" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Discounts" Relationship="Self.FK_Discounts_Hotels" FromRole="Hotels" ToRole="Discounts" />
+          <NavigationProperty Name="Payment" Relationship="Self.FK_Payment_Hotels" FromRole="Hotels" ToRole="Payment" />
+          <NavigationProperty Name="Registration" Relationship="Self.FK_Registration_Hotels" FromRole="Hotels" ToRole="Registration" />
+          <NavigationProperty Name="Rooms" Relationship="Self.FK_Rooms_Hotels" FromRole="Hotels" ToRole="Rooms" />
+          <NavigationProperty Name="Wishes" Relationship="Self.FK_Wishes_Hotels" FromRole="Hotels" ToRole="Wishes" />
+        </EntityType>
+        <EntityType Name="Payment">
+          <Key>
+            <PropertyRef Name="PaymentID" />
+          </Key>
+          <Property Name="PaymentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PaymentSize" Type="Double" Nullable="false" />
+          <Property Name="PaymentDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="GuestID" Type="Int32" Nullable="false" />
+          <Property Name="HotelID" Type="Int32" Nullable="false" />
+          <Property Name="PaymentComment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Guests" Relationship="Self.FK_Payment_Payment" FromRole="Payment" ToRole="Guests" />
+          <NavigationProperty Name="Hotels" Relationship="Self.FK_Payment_Hotels" FromRole="Payment" ToRole="Hotels" />
+        </EntityType>
+        <EntityType Name="Registration">
+          <Key>
+            <PropertyRef Name="RegistrationID" />
+          </Key>
+          <Property Name="RegistrationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GuestID" Type="Int32" />
+          <Property Name="RoomID" Type="Int32" />
+          <Property Name="EntryDate" Type="DateTime" Precision="3" />
+          <Property Name="ExitDate" Type="DateTime" Precision="3" />
+          <Property Name="HotelID" Type="Int32" />
+          <NavigationProperty Name="Guests" Relationship="Self.FK_Registration_Guests" FromRole="Registration" ToRole="Guests" />
+          <NavigationProperty Name="Hotels" Relationship="Self.FK_Registration_Hotels" FromRole="Registration" ToRole="Hotels" />
+          <NavigationProperty Name="Rooms" Relationship="Self.FK_Registration_Rooms" FromRole="Registration" ToRole="Rooms" />
+        </EntityType>
+        <EntityType Name="Rooms">
+          <Key>
+            <PropertyRef Name="RoomID" />
+          </Key>
+          <Property Name="RoomID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoomNum" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="NumberOfPlaces" Type="Byte" />
+          <Property Name="TypeID" Type="Int32" />
+          <Property Name="CostPerDay" Type="Int32" />
+          <Property Name="HotelID" Type="Int32" />
+          <NavigationProperty Name="Hotels" Relationship="Self.FK_Rooms_Hotels" FromRole="Rooms" ToRole="Hotels" />
+          <NavigationProperty Name="Registration" Relationship="Self.FK_Registration_Rooms" FromRole="Rooms" ToRole="Registration" />
+          <NavigationProperty Name="TypesOfRooms" Relationship="Self.FK_Rooms_TypesOfRooms" FromRole="Rooms" ToRole="TypesOfRooms" />
+        </EntityType>
+        <EntityType Name="ServiceRealization">
+          <Key>
+            <PropertyRef Name="RealizationID" />
+          </Key>
+          <Property Name="RealizationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RealizationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="GuestID" Type="Int32" Nullable="false" />
+          <Property Name="ServiceID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Guests" Relationship="Self.FK_ServiceRealization_Guests" FromRole="ServiceRealization" ToRole="Guests" />
+          <NavigationProperty Name="Services" Relationship="Self.FK_ServiceRealization_Services" FromRole="ServiceRealization" ToRole="Services" />
+        </EntityType>
+        <EntityType Name="Services">
+          <Key>
+            <PropertyRef Name="ServiceID" />
+          </Key>
+          <Property Name="ServiceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ServiceTitle" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ServiceCost" Type="Double" Nullable="false" />
+          <NavigationProperty Name="ServiceRealization" Relationship="Self.FK_ServiceRealization_Services" FromRole="Services" ToRole="ServiceRealization" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TypesOfRooms">
+          <Key>
+            <PropertyRef Name="TypeID" />
+          </Key>
+          <Property Name="TypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Rooms" Relationship="Self.FK_Rooms_TypesOfRooms" FromRole="TypesOfRooms" ToRole="Rooms" />
+        </EntityType>
+        <EntityType Name="Wishes">
+          <Key>
+            <PropertyRef Name="WishID" />
+          </Key>
+          <Property Name="WishID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WishContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="GuestID" Type="Int32" />
+          <Property Name="HotelID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Guests" Relationship="Self.FK_Wishes_Guests" FromRole="Wishes" ToRole="Guests" />
+          <NavigationProperty Name="Hotels" Relationship="Self.FK_Wishes_Hotels" FromRole="Wishes" ToRole="Hotels" />
+        </EntityType>
+        <EntityType Name="FreeRoomsView">
+          <Key>
+            <PropertyRef Name="RoomID" />
+          </Key>
+          <Property Name="RoomID" Type="Int32" Nullable="false" />
+          <Property Name="RoomNum" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="NumberOfPlaces" Type="Byte" />
+          <Property Name="CostPerDay" Type="Int32" />
+          <Property Name="Type" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="GuestsServicesTotalCostsView">
+          <Key>
+            <PropertyRef Name="GuestID" />
+          </Key>
+          <Property Name="GuestID" Type="Int32" Nullable="false" />
+          <Property Name="ServicesTotalCost" Type="Double" />
+        </EntityType>
+        <EntityType Name="GuestsTotalDebt">
+          <Key>
+            <PropertyRef Name="GuestID" />
+          </Key>
+          <Property Name="GuestID" Type="Int32" Nullable="false" />
+          <Property Name="ServicesTotalCost" Type="Double" />
+          <Property Name="RentCost" Type="Int32" />
+          <Property Name="TotalDebt" Type="Double" />
+        </EntityType>
+        <EntityType Name="PaymentsView">
+          <Key>
+            <PropertyRef Name="GuestID" />
+          </Key>
+          <Property Name="GuestID" Type="Int32" Nullable="false" />
+          <Property Name="ServicesTotalCost" Type="Double" />
+          <Property Name="RentCost" Type="Int32" />
+          <Property Name="TotalDebt" Type="Double" />
+          <Property Name="Debt" Type="Double" />
+        </EntityType>
+        <EntityType Name="RegistrationView">
+          <Key>
+            <PropertyRef Name="RegistrationID" />
+          </Key>
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="SecName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ThirdName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="RoomNum" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="NumberOfPlaces" Type="Byte" />
+          <Property Name="CostPerDay" Type="Int32" />
+          <Property Name="Type" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="EntryDate" Type="DateTime" Precision="3" />
+          <Property Name="ExitDate" Type="DateTime" Precision="3" />
+          <Property Name="RegistrationID" Type="Int32" Nullable="false" />
+          <Property Name="RoomID" Type="Int32" />
+          <Property Name="GuestID" Type="Int32" />
+          <Property Name="DaysCount" Type="Int32" />
+          <Property Name="DiscountID" Type="Int32" />
+          <Property Name="DiscountTitle" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="TotalCost" Type="Int32" />
+        </EntityType>
+        <EntityType Name="RoomsView">
+          <Key>
+            <PropertyRef Name="RoomID" />
+          </Key>
+          <Property Name="RoomNum" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="RoomID" Type="Int32" Nullable="false" />
+          <Property Name="NumberOfPlaces" Type="Byte" />
+          <Property Name="CostPerDay" Type="Int32" />
+          <Property Name="Type" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_Discounts_Hotels">
+          <End Role="Hotels" Type="Self.Hotels" Multiplicity="0..1" />
+          <End Role="Discounts" Type="Self.Discounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hotels">
+              <PropertyRef Name="HotelID" />
+            </Principal>
+            <Dependent Role="Discounts">
+              <PropertyRef Name="HotelID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GuestsDiscounts_Discounts">
+          <End Role="Discounts" Type="Self.Discounts" Multiplicity="1" />
+          <End Role="GuestsDiscounts" Type="Self.GuestsDiscounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Discounts">
+              <PropertyRef Name="DiscountID" />
+            </Principal>
+            <Dependent Role="GuestsDiscounts">
+              <PropertyRef Name="DiscountID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GuestsDiscounts_Guests">
+          <End Role="Guests" Type="Self.Guests" Multiplicity="1" />
+          <End Role="GuestsDiscounts" Type="Self.GuestsDiscounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Guests">
+              <PropertyRef Name="GuestID" />
+            </Principal>
+            <Dependent Role="GuestsDiscounts">
+              <PropertyRef Name="GuestID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payment_Payment">
+          <End Role="Guests" Type="Self.Guests" Multiplicity="1" />
+          <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Guests">
+              <PropertyRef Name="GuestID" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="GuestID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Registration_Guests">
+          <End Role="Guests" Type="Self.Guests" Multiplicity="0..1" />
+          <End Role="Registration" Type="Self.Registration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Guests">
+              <PropertyRef Name="GuestID" />
+            </Principal>
+            <Dependent Role="Registration">
+              <PropertyRef Name="GuestID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServiceRealization_Guests">
+          <End Role="Guests" Type="Self.Guests" Multiplicity="1" />
+          <End Role="ServiceRealization" Type="Self.ServiceRealization" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Guests">
+              <PropertyRef Name="GuestID" />
+            </Principal>
+            <Dependent Role="ServiceRealization">
+              <PropertyRef Name="GuestID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Wishes_Guests">
+          <End Role="Guests" Type="Self.Guests" Multiplicity="0..1" />
+          <End Role="Wishes" Type="Self.Wishes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Guests">
+              <PropertyRef Name="GuestID" />
+            </Principal>
+            <Dependent Role="Wishes">
+              <PropertyRef Name="GuestID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payment_Hotels">
+          <End Role="Hotels" Type="Self.Hotels" Multiplicity="1" />
+          <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hotels">
+              <PropertyRef Name="HotelID" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="HotelID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Registration_Hotels">
+          <End Role="Hotels" Type="Self.Hotels" Multiplicity="0..1" />
+          <End Role="Registration" Type="Self.Registration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hotels">
+              <PropertyRef Name="HotelID" />
+            </Principal>
+            <Dependent Role="Registration">
+              <PropertyRef Name="HotelID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rooms_Hotels">
+          <End Role="Hotels" Type="Self.Hotels" Multiplicity="0..1" />
+          <End Role="Rooms" Type="Self.Rooms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hotels">
+              <PropertyRef Name="HotelID" />
+            </Principal>
+            <Dependent Role="Rooms">
+              <PropertyRef Name="HotelID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Wishes_Hotels">
+          <End Role="Hotels" Type="Self.Hotels" Multiplicity="1" />
+          <End Role="Wishes" Type="Self.Wishes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hotels">
+              <PropertyRef Name="HotelID" />
+            </Principal>
+            <Dependent Role="Wishes">
+              <PropertyRef Name="HotelID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Registration_Rooms">
+          <End Role="Rooms" Type="Self.Rooms" Multiplicity="0..1" />
+          <End Role="Registration" Type="Self.Registration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rooms">
+              <PropertyRef Name="RoomID" />
+            </Principal>
+            <Dependent Role="Registration">
+              <PropertyRef Name="RoomID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rooms_TypesOfRooms">
+          <End Role="TypesOfRooms" Type="Self.TypesOfRooms" Multiplicity="0..1" />
+          <End Role="Rooms" Type="Self.Rooms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypesOfRooms">
+              <PropertyRef Name="TypeID" />
+            </Principal>
+            <Dependent Role="Rooms">
+              <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServiceRealization_Services">
+          <End Role="Services" Type="Self.Services" Multiplicity="1" />
+          <End Role="ServiceRealization" Type="Self.ServiceRealization" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Services">
+              <PropertyRef Name="ServiceID" />
+            </Principal>
+            <Dependent Role="ServiceRealization">
+              <PropertyRef Name="ServiceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Discounts" EntityType="Self.Discounts" />
+          <EntitySet Name="Guests" EntityType="Self.Guests" />
+          <EntitySet Name="GuestsDiscounts" EntityType="Self.GuestsDiscounts" />
+          <EntitySet Name="Hotels" EntityType="Self.Hotels" />
+          <EntitySet Name="Payment" EntityType="Self.Payment" />
+          <EntitySet Name="Registration" EntityType="Self.Registration" />
+          <EntitySet Name="Rooms" EntityType="Self.Rooms" />
+          <EntitySet Name="ServiceRealization" EntityType="Self.ServiceRealization" />
+          <EntitySet Name="Services" EntityType="Self.Services" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="TypesOfRooms" EntityType="Self.TypesOfRooms" />
+          <EntitySet Name="Wishes" EntityType="Self.Wishes" />
+          <EntitySet Name="FreeRoomsView" EntityType="Self.FreeRoomsView" />
+          <EntitySet Name="GuestsServicesTotalCostsView" EntityType="Self.GuestsServicesTotalCostsView" />
+          <EntitySet Name="GuestsTotalDebt" EntityType="Self.GuestsTotalDebt" />
+          <EntitySet Name="PaymentsView" EntityType="Self.PaymentsView" />
+          <EntitySet Name="RegistrationView" EntityType="Self.RegistrationView" />
+          <EntitySet Name="RoomsView" EntityType="Self.RoomsView" />
+          <AssociationSet Name="FK_Discounts_Hotels" Association="Self.FK_Discounts_Hotels">
+            <End Role="Hotels" EntitySet="Hotels" />
+            <End Role="Discounts" EntitySet="Discounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GuestsDiscounts_Discounts" Association="Self.FK_GuestsDiscounts_Discounts">
+            <End Role="Discounts" EntitySet="Discounts" />
+            <End Role="GuestsDiscounts" EntitySet="GuestsDiscounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GuestsDiscounts_Guests" Association="Self.FK_GuestsDiscounts_Guests">
+            <End Role="Guests" EntitySet="Guests" />
+            <End Role="GuestsDiscounts" EntitySet="GuestsDiscounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payment_Payment" Association="Self.FK_Payment_Payment">
+            <End Role="Guests" EntitySet="Guests" />
+            <End Role="Payment" EntitySet="Payment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Registration_Guests" Association="Self.FK_Registration_Guests">
+            <End Role="Guests" EntitySet="Guests" />
+            <End Role="Registration" EntitySet="Registration" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServiceRealization_Guests" Association="Self.FK_ServiceRealization_Guests">
+            <End Role="Guests" EntitySet="Guests" />
+            <End Role="ServiceRealization" EntitySet="ServiceRealization" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Wishes_Guests" Association="Self.FK_Wishes_Guests">
+            <End Role="Guests" EntitySet="Guests" />
+            <End Role="Wishes" EntitySet="Wishes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payment_Hotels" Association="Self.FK_Payment_Hotels">
+            <End Role="Hotels" EntitySet="Hotels" />
+            <End Role="Payment" EntitySet="Payment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Registration_Hotels" Association="Self.FK_Registration_Hotels">
+            <End Role="Hotels" EntitySet="Hotels" />
+            <End Role="Registration" EntitySet="Registration" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rooms_Hotels" Association="Self.FK_Rooms_Hotels">
+            <End Role="Hotels" EntitySet="Hotels" />
+            <End Role="Rooms" EntitySet="Rooms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Wishes_Hotels" Association="Self.FK_Wishes_Hotels">
+            <End Role="Hotels" EntitySet="Hotels" />
+            <End Role="Wishes" EntitySet="Wishes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Registration_Rooms" Association="Self.FK_Registration_Rooms">
+            <End Role="Rooms" EntitySet="Rooms" />
+            <End Role="Registration" EntitySet="Registration" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rooms_TypesOfRooms" Association="Self.FK_Rooms_TypesOfRooms">
+            <End Role="TypesOfRooms" EntitySet="TypesOfRooms" />
+            <End Role="Rooms" EntitySet="Rooms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServiceRealization_Services" Association="Self.FK_ServiceRealization_Services">
+            <End Role="Services" EntitySet="Services" />
+            <End Role="ServiceRealization" EntitySet="ServiceRealization" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BaseModelStoreContainer" CdmEntityContainer="BaseEntities">
+          <EntitySetMapping Name="Discounts">
+            <EntityTypeMapping TypeName="BaseModel.Discounts">
+              <MappingFragment StoreEntitySet="Discounts">
+                <ScalarProperty Name="DiscountID" ColumnName="DiscountID" />
+                <ScalarProperty Name="DiscountTitle" ColumnName="DiscountTitle" />
+                <ScalarProperty Name="DiscountSize" ColumnName="DiscountSize" />
+                <ScalarProperty Name="HotelID" ColumnName="HotelID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Guests">
+            <EntityTypeMapping TypeName="BaseModel.Guests">
+              <MappingFragment StoreEntitySet="Guests">
+                <ScalarProperty Name="GuestID" ColumnName="GuestID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="SecName" ColumnName="SecName" />
+                <ScalarProperty Name="ThirdName" ColumnName="ThirdName" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="PassportData" ColumnName="PassportData" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GuestsDiscounts">
+            <EntityTypeMapping TypeName="BaseModel.GuestsDiscounts">
+              <MappingFragment StoreEntitySet="GuestsDiscounts">
+                <ScalarProperty Name="GuestsDisocuntsID" ColumnName="GuestsDisocuntsID" />
+                <ScalarProperty Name="DiscountID" ColumnName="DiscountID" />
+                <ScalarProperty Name="GuestID" ColumnName="GuestID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Hotels">
+            <EntityTypeMapping TypeName="BaseModel.Hotels">
+              <MappingFragment StoreEntitySet="Hotels">
+                <ScalarProperty Name="HotelID" ColumnName="HotelID" />
+                <ScalarProperty Name="HotelName" ColumnName="HotelName" />
+                <ScalarProperty Name="HotelRating" ColumnName="HotelRating" />
+                <ScalarProperty Name="HotelAddress" ColumnName="HotelAddress" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Payment">
+            <EntityTypeMapping TypeName="BaseModel.Payment">
+              <MappingFragment StoreEntitySet="Payment">
+                <ScalarProperty Name="PaymentID" ColumnName="PaymentID" />
+                <ScalarProperty Name="PaymentSize" ColumnName="PaymentSize" />
+                <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+                <ScalarProperty Name="GuestID" ColumnName="GuestID" />
+                <ScalarProperty Name="HotelID" ColumnName="HotelID" />
+                <ScalarProperty Name="PaymentComment" ColumnName="PaymentComment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Registration">
+            <EntityTypeMapping TypeName="BaseModel.Registration">
+              <MappingFragment StoreEntitySet="Registration">
+                <ScalarProperty Name="RegistrationID" ColumnName="RegistrationID" />
+                <ScalarProperty Name="GuestID" ColumnName="GuestID" />
+                <ScalarProperty Name="RoomID" ColumnName="RoomID" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="ExitDate" ColumnName="ExitDate" />
+                <ScalarProperty Name="HotelID" ColumnName="HotelID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rooms">
+            <EntityTypeMapping TypeName="BaseModel.Rooms">
+              <MappingFragment StoreEntitySet="Rooms">
+                <ScalarProperty Name="RoomID" ColumnName="RoomID" />
+                <ScalarProperty Name="RoomNum" ColumnName="RoomNum" />
+                <ScalarProperty Name="NumberOfPlaces" ColumnName="NumberOfPlaces" />
+                <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+                <ScalarProperty Name="CostPerDay" ColumnName="CostPerDay" />
+                <ScalarProperty Name="HotelID" ColumnName="HotelID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServiceRealization">
+            <EntityTypeMapping TypeName="BaseModel.ServiceRealization">
+              <MappingFragment StoreEntitySet="ServiceRealization">
+                <ScalarProperty Name="RealizationID" ColumnName="RealizationID" />
+                <ScalarProperty Name="RealizationDate" ColumnName="RealizationDate" />
+                <ScalarProperty Name="GuestID" ColumnName="GuestID" />
+                <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Services">
+            <EntityTypeMapping TypeName="BaseModel.Services">
+              <MappingFragment StoreEntitySet="Services">
+                <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
+                <ScalarProperty Name="ServiceTitle" ColumnName="ServiceTitle" />
+                <ScalarProperty Name="ServiceCost" ColumnName="ServiceCost" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="BaseModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypesOfRooms">
+            <EntityTypeMapping TypeName="BaseModel.TypesOfRooms">
+              <MappingFragment StoreEntitySet="TypesOfRooms">
+                <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Wishes">
+            <EntityTypeMapping TypeName="BaseModel.Wishes">
+              <MappingFragment StoreEntitySet="Wishes">
+                <ScalarProperty Name="WishID" ColumnName="WishID" />
+                <ScalarProperty Name="WishContent" ColumnName="WishContent" />
+                <ScalarProperty Name="GuestID" ColumnName="GuestID" />
+                <ScalarProperty Name="HotelID" ColumnName="HotelID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FreeRoomsView">
+            <EntityTypeMapping TypeName="BaseModel.FreeRoomsView">
+              <MappingFragment StoreEntitySet="FreeRoomsView">
+                <ScalarProperty Name="RoomID" ColumnName="RoomID" />
+                <ScalarProperty Name="RoomNum" ColumnName="RoomNum" />
+                <ScalarProperty Name="NumberOfPlaces" ColumnName="NumberOfPlaces" />
+                <ScalarProperty Name="CostPerDay" ColumnName="CostPerDay" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GuestsServicesTotalCostsView">
+            <EntityTypeMapping TypeName="BaseModel.GuestsServicesTotalCostsView">
+              <MappingFragment StoreEntitySet="GuestsServicesTotalCostsView">
+                <ScalarProperty Name="GuestID" ColumnName="GuestID" />
+                <ScalarProperty Name="ServicesTotalCost" ColumnName="ServicesTotalCost" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GuestsTotalDebt">
+            <EntityTypeMapping TypeName="BaseModel.GuestsTotalDebt">
+              <MappingFragment StoreEntitySet="GuestsTotalDebt">
+                <ScalarProperty Name="GuestID" ColumnName="GuestID" />
+                <ScalarProperty Name="ServicesTotalCost" ColumnName="ServicesTotalCost" />
+                <ScalarProperty Name="RentCost" ColumnName="RentCost" />
+                <ScalarProperty Name="TotalDebt" ColumnName="TotalDebt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PaymentsView">
+            <EntityTypeMapping TypeName="BaseModel.PaymentsView">
+              <MappingFragment StoreEntitySet="PaymentsView">
+                <ScalarProperty Name="GuestID" ColumnName="GuestID" />
+                <ScalarProperty Name="ServicesTotalCost" ColumnName="ServicesTotalCost" />
+                <ScalarProperty Name="RentCost" ColumnName="RentCost" />
+                <ScalarProperty Name="TotalDebt" ColumnName="TotalDebt" />
+                <ScalarProperty Name="Debt" ColumnName="Debt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RegistrationView">
+            <EntityTypeMapping TypeName="BaseModel.RegistrationView">
+              <MappingFragment StoreEntitySet="RegistrationView">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="SecName" ColumnName="SecName" />
+                <ScalarProperty Name="ThirdName" ColumnName="ThirdName" />
+                <ScalarProperty Name="RoomNum" ColumnName="RoomNum" />
+                <ScalarProperty Name="NumberOfPlaces" ColumnName="NumberOfPlaces" />
+                <ScalarProperty Name="CostPerDay" ColumnName="CostPerDay" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="ExitDate" ColumnName="ExitDate" />
+                <ScalarProperty Name="RegistrationID" ColumnName="RegistrationID" />
+                <ScalarProperty Name="RoomID" ColumnName="RoomID" />
+                <ScalarProperty Name="GuestID" ColumnName="GuestID" />
+                <ScalarProperty Name="DaysCount" ColumnName="DaysCount" />
+                <ScalarProperty Name="DiscountID" ColumnName="DiscountID" />
+                <ScalarProperty Name="DiscountTitle" ColumnName="DiscountTitle" />
+                <ScalarProperty Name="TotalCost" ColumnName="TotalCost" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RoomsView">
+            <EntityTypeMapping TypeName="BaseModel.RoomsView">
+              <MappingFragment StoreEntitySet="RoomsView">
+                <ScalarProperty Name="RoomNum" ColumnName="RoomNum" />
+                <ScalarProperty Name="RoomID" ColumnName="RoomID" />
+                <ScalarProperty Name="NumberOfPlaces" ColumnName="NumberOfPlaces" />
+                <ScalarProperty Name="CostPerDay" ColumnName="CostPerDay" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

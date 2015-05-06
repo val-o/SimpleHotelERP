@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" dslVersion="1.0.0.0" Id="09833276-4200-4810-84b5-3ad16cb422c3" name="UMLClassDiagram1" linkedPackageId="f2de413e-8a22-4068-80ae-238653c944b7" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
+  <profileInstances>
+    <packageHasProfileInstances Id="b176169f-63b4-4925-bbde-549337cdd22a">
+      <profileInstance Id="bcda9a0c-e88c-4fdc-abfe-c1776cb6062c" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="2148a22e-8629-4492-b768-fc42e9e59877">
+      <profileInstance Id="02c56955-4797-4376-b187-cbf164406034" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="011461c5-e9e6-4044-b143-ff954c0deff7" name="BaseViewModel : INPC" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="7bfb9226-85dd-4ee2-98fc-697c2876a4b0" />
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="f879d729-4505-4a82-92ed-6cc90d7c4002" name="RoomsViewModel" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="d8d35293-128c-4c5c-9bbf-ea819ad3ac66" />
+        <generalsInternal>
+          <generalization Id="7397fd73-5d9e-469d-9c89-82deb1c36c67" isSubstitutable="false">
+            <classMoniker Id="011461c5-e9e6-4044-b143-ff954c0deff7" LastKnownName="BaseViewModel : INPC" />
+            <elementDefinition Id="a6ec137e-c902-42bd-bf3c-ed399fab96b6" />
+          </generalization>
+        </generalsInternal>
+        <targetEnds>
+          <association Id="051dc800-b1f3-4b35-bc0c-a2ae92d11a17" isDerived="false" sourceEndRoleName="RoomsViewModel" targetEndRoleName="RoomsEditViewModel" isLeaf="false" isAbstract="false">
+            <classMoniker Id="2e61eb15-eecf-41ec-a826-47b64c6aff18" LastKnownName="RoomsEditViewModel" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="8bc43f74-2054-479f-9f53-48b17013e9b0" name="RoomsViewModel" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="2c41cd3e-d608-4821-986b-24e5dc928757" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="54a8a0b2-02b0-4671-b8e2-157c02400953" name="RoomsEditViewModel" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="11e53d0f-aa97-40a0-902e-e86dc9281a70" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="13aec8a7-10cd-40f0-ba9b-dabc6c2ae077" />
+          </association>
+        </targetEnds>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <Interface Id="3aa4139c-2988-4927-832e-674d1ababf3c" name="IRepository" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="a67adfb0-1ac4-43ca-a7e6-95a090134394" />
+      </Interface>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="e4679920-9229-4a9b-8178-8d153551fc03" name="RoomsRepository" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="bfb85c56-9f16-4e06-beea-c81f14c47337" />
+        <suppliersInternal>
+          <interfaceRealization Id="744f462f-3fd9-49f4-92f2-91a561045fc7">
+            <interfaceMoniker Id="3aa4139c-2988-4927-832e-674d1ababf3c" LastKnownName="IRepository" />
+            <elementDefinition Id="c2a7abf5-7241-4848-b051-1a29d780897b" />
+          </interfaceRealization>
+        </suppliersInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="2e61eb15-eecf-41ec-a826-47b64c6aff18" name="RoomsEditViewModel" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="48108cc3-c0ee-434d-90b8-cebc742ee970" />
+        <generalsInternal>
+          <generalization Id="79d7b5d6-7d0a-49e3-bfcb-10f1be7d0f33" isSubstitutable="false">
+            <classMoniker Id="36844135-a259-407a-a2c0-c08c1f90ccfa" LastKnownName="EdirViewModelBasse" />
+            <elementDefinition Id="f06d57bd-4e84-41b2-bb30-5a8526bbf297" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="36844135-a259-407a-a2c0-c08c1f90ccfa" name="EdirViewModelBasse" isAbstract="true" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="afdfa9e9-fa05-4bd2-ad98-14054dd357ee" />
+        <generalsInternal>
+          <generalization Id="bd063dee-9cbd-4334-b56c-500d6c1bc3ca" isSubstitutable="false">
+            <classMoniker Id="011461c5-e9e6-4044-b143-ff954c0deff7" LastKnownName="BaseViewModel : INPC" />
+            <elementDefinition Id="154c0dd6-d3ea-4bfe-8b3b-bb964797e53f" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+  </packagedElements>
+  <package Id="f2de413e-8a22-4068-80ae-238653c944b7" name="ModelingProject1">
+    <elementDefinition Id="636d6c12-364f-4cbe-9c57-2284434ab3e8" />
+  </package>
+</logicalClassDesignerModel>

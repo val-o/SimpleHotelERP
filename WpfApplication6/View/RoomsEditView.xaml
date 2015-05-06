@@ -1,0 +1,109 @@
+﻿<UserControl x:Name="userControl" x:Class="Main.View.RoomsEditView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="422.15" d:DesignWidth="300" Style="{DynamicResource UserControlStyle}" RenderTransformOrigin="0.5,0.5" Background="#FF00C5FF">
+	<UserControl.Resources>
+		<Storyboard x:Key="ClosingStoryBoard">
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="userControl">
+				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="400">
+					<EasingDoubleKeyFrame.EasingFunction>
+						<ExponentialEase EasingMode="EaseOut" Exponent="-3"/>
+					</EasingDoubleKeyFrame.EasingFunction>
+				</EasingDoubleKeyFrame>
+			</DoubleAnimationUsingKeyFrames>
+		</Storyboard>
+		<Storyboard x:Key="Loading">
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="userControl">
+				<EasingDoubleKeyFrame KeyTime="0" Value="320"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0">
+					<EasingDoubleKeyFrame.EasingFunction>
+						<QuadraticEase EasingMode="EaseOut"/>
+					</EasingDoubleKeyFrame.EasingFunction>
+				</EasingDoubleKeyFrame>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="userControl">
+				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
+			</DoubleAnimationUsingKeyFrames>
+		</Storyboard>
+	</UserControl.Resources>
+	<UserControl.Triggers>
+		<EventTrigger RoutedEvent="FrameworkElement.Loaded">
+			<BeginStoryboard x:Name="Loading_BeginStoryboard" Storyboard="{StaticResource Loading}"/>
+		</EventTrigger>
+	</UserControl.Triggers>
+    <UserControl.RenderTransform>
+		<TransformGroup>
+			<ScaleTransform/>
+			<SkewTransform/>
+			<RotateTransform/>
+			<TranslateTransform/>
+		</TransformGroup>
+	</UserControl.RenderTransform>
+    <Grid x:Name="grid">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="5*" />
+        </Grid.RowDefinitions>
+
+        <!-- Header-->
+        <Border >
+            <TextBlock Text="{Binding Path=HeaderText}" Style="{DynamicResource LucidaWhite14TextBlockStyle}" Height="43" VerticalAlignment="Bottom"/>
+        </Border>
+
+        <!-- Body-->
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Номер" Style="{DynamicResource LucidaWhite14TextBlockStyle}" FontSize="16"></TextBlock>
+            <TextBlock Grid.Row="2" Text="Вместимость" Style="{DynamicResource LucidaWhite14TextBlockStyle}"></TextBlock>
+            <TextBlock Grid.Row="4" Text="Стоимость" Style="{DynamicResource LucidaWhite14TextBlockStyle}" FontSize="16"></TextBlock>
+            <TextBlock Grid.Row="6" Text="Класс" Style="{DynamicResource LucidaWhite14TextBlockStyle}" HorizontalAlignment="Right" Margin="0,4,52,4"></TextBlock>
+<!-- Textboxes -->
+            <TextBox Name="RoomNumTextBox" Text="{Binding Path=RoomNum, UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" Grid.Row="0" Grid.Column="1" Margin="0,5"></TextBox>
+            <TextBox Name="NumberOfPalcesTextBox" Text="{Binding Path=NumberOfPlaces, UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberOfPlaces_OnPreviewTextInput"  Grid.Row="2" Grid.Column="1" Margin="0,5"></TextBox>
+            <TextBox Name="CostTextBox"  Text="{Binding Path=CostPerDay, UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="UIElement_OnPreviewTextInput" Grid.Row="4" Grid.Column="1" Margin="0,5" ></TextBox>
+            <ComboBox Grid.Row="6" Grid.Column="1" ItemsSource="{Binding Path=TypesOfRoomsCollection}"
+                      SelectedItem="{Binding Path=TypesOfRooms, UpdateSourceTrigger=PropertyChanged}" Margin="0,5">
+                
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Path=Type}" ></TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+<!-- DateErrors -->
+            <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" 
+                   Text="{Binding ElementName=RoomNumTextBox, Path=(Validation.Errors)[0].ErrorContent}" 
+                    Style="{DynamicResource GuestsErrorTextBlock}" Foreground="Maroon"></TextBlock>
+
+
+            <!--Buttons-->
+            <Button Grid.Column="2" Grid.Row="11" Margin="5" IsEnabled="{Binding Path=IsAddButtonEnabled}" Content ="{Binding Path=ButtonText}" Command="{Binding Path=AddOrEditCommand}"  Click="Close" Style="{DynamicResource OkStyle}"></Button>
+            <Button Name="CancelButton" Grid.Column="0" Grid.Row="11" Margin="5" Content ="Отмена" Click="Close" Style="{DynamicResource CancellButtonStyle}" FontFamily="Lucida Sans Unicode" FontSize="16" Background="#FF00C5FF"></Button>
+        </Grid>
+
+
+    </Grid>
+</UserControl>

@@ -1,0 +1,101 @@
+﻿<UserControl x:Class="Main.View.PaymentsEditView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" Name ="userControl"
+             d:DesignHeight="188" d:DesignWidth="740" RenderTransformOrigin="0.5,0.5">
+    <UserControl.Resources>
+        <Storyboard x:Key="ClosingStoryBoard">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="userControl">
+                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="OnLoad">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="userControl">
+                <EasingDoubleKeyFrame KeyTime="0" Value="200"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CubicEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="userControl">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CubicEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+
+        </Storyboard>
+    </UserControl.Resources>
+    <UserControl.RenderTransform>
+        <TransformGroup>
+            <ScaleTransform/>
+            <SkewTransform/>
+            <RotateTransform/>
+            <TranslateTransform/>
+        </TransformGroup>
+    </UserControl.RenderTransform>
+    <UserControl.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <BeginStoryboard x:Name="OnLoad_BeginStoryboard" Storyboard="{StaticResource OnLoad}"/>
+        </EventTrigger>
+    </UserControl.Triggers>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Rectangle Grid.ColumnSpan="5" Fill="#FF444444" Grid.Row="1" Grid.RowSpan="4" Stroke="Black" StrokeThickness="0"/>
+        <Path Grid.ColumnSpan="5" Data="M4.9999971,0 L735,0 C737.76141,1.9073486E-06 740,2.2385788 740,4.9999971 L740,20 740,42.000006 740,47.000004 735,47.000004 4.9999971,47.000004 0,47.000004 0,42.000006 0,20 0,4.9999971 C0,2.2385788 2.2385762,1.9073486E-06 4.9999971,0 z" Fill="#FF00B2B2" Stretch="Fill" Stroke="Black" StrokeThickness="0"/>
+
+        <TextBlock Text="Плательщик" Grid.Column="1" Grid.Row="1" Style="{DynamicResource LucidaWhite14TextBlockStyle}"/>
+
+        <ListView SelectedItem="{Binding CurrentPaymentsView, UpdateSourceTrigger=PropertyChanged}"
+                  Grid.Row="2" Grid.RowSpan="3" ItemsSource="{Binding PaymentsGuestsCollection}" Margin="80,5,78,5" Grid.ColumnSpan="3">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock x:Name="RoomNumTextBlock" Text="{Binding SecName}"/>
+                            <TextBlock Text=" "/>
+                            <TextBlock Text="{Binding Name}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Задолженность: "/>
+                            <TextBlock Text="{Binding Debt, ConverterCulture=ru-RU, StringFormat=c}"/>
+                        </StackPanel>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <TextBlock Text="Размер платежа" Grid.Column="3" Grid.Row="2" Style="{DynamicResource LucidaWhite14TextBlockStyle}"/>
+        <TextBox x:Name="SizeTextBox"  Grid.Column="4" Grid.Row="2" Text="{Binding PaymentSize, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{DynamicResource errorBlank}" PreviewTextInput="SizeTextBox_PreviewTextInput" VerticalAlignment="Center" />
+        <TextBlock Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="2" 
+                   Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=SizeTextBox}" 
+                    Style="{DynamicResource GuestsErrorTextBlock}"/>
+
+        <TextBlock Text="Комментарий" Grid.Column="3" Grid.Row="1" Style="{DynamicResource LucidaWhite14TextBlockStyle}"/>
+        <TextBox x:Name="PaymentComment"  Grid.Column="4" Grid.Row="1" Text="{Binding PaymentCpmment, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"/>
+
+
+        <TextBlock Style="{DynamicResource LucidaWhite14TextBlockStyle}" Text="Внести платеж" FontSize="18.667" Grid.ColumnSpan="5"/>
+        <Button Content="{Binding ButtonText}" IsEnabled="{Binding IsAddButtonEnabled}" Command="{Binding AddOrEditCommand}" Grid.Column="4" Grid.Row="4" Click="Close" Style="{DynamicResource OkStyle}" FontFamily="Lucida Sans Unicode" FontSize="16" Foreground="White" Margin="5"/>
+        <Button Content="Отмена" Grid.Column="3" Grid.Row="4" Click="Close" VerticalAlignment="Center" Style="{DynamicResource CancellButtonStyle}" FontFamily="Lucida Sans Unicode" FontSize="16" Foreground="White" Margin="5"/>
+    </Grid>
+</UserControl>

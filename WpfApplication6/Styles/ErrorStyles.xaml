@@ -1,0 +1,15 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ControlTemplate x:Key="errorBlank">
+    </ControlTemplate>
+    <Style x:Key="GuestsErrorTextBlock" TargetType="{x:Type TextBlock}">
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="TextTrimming" Value="None"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Foreground" Value="#FFFF8A8A"/>
+        <Setter Property="FontSize" Value="14"></Setter>
+        <Setter Property="FontFamily" Value="Lucida Sans Unicode"></Setter>
+    </Style>
+</ResourceDictionary>

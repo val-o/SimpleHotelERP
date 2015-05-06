@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="file:///D:/PROGRAM FILES (X86)/MICROSOFT VISUAL STUDIO 12.0/COMMON7/IDE/EXTENSIONS/MICROSOFT/ARCHITECTURE TOOLS/EXTENSIBILITY/Logging/CodeGenLog.xslt"?>
+<Log xmlns="http://schemas.microsoft.com/VisualStudio/2010/CodeGen.RE.Log" Label="Журнал создания кода/преобразования текста">
+  <MessageClass Name="Message" Label="Сообщение" Option="Показывать информационные сообщения" />
+  <MessageClass Name="Warning" Label="Предупреждение" Option="Показывать предупреждения" />
+  <MessageClass Name="Error" Label="Ошибка" Option="Показывать ошибки" />
+  <MessageClass Name="Property" Label="Свойство" Option="Показывать метаданные" />
+  <MessageClass Name="Diagnostic" Label="Сообщение" Option="Показывать диагностические сообщения" />
+  <Message Timestamp="2014-11-29T21:27:28" Importance="High" Text="Запущено создание кода или преобразование текста." />
+  <Error Timestamp="2014-11-29T21:27:28" Importance="High" Text="Не найдены шаблоны для обработки.  Настройте шаблоны, нажав кнопку &quot;Настроить параметры создания кода по умолчанию...&quot; в меню &quot;Архитектура&quot;, или измените набор выбранных объектов, для которых запускается создание кода." />
+  <Message Timestamp="2014-11-29T21:27:28" Importance="Diagnostic" Text="Выбрано 8 элементов, не связанных с шаблоном." />
+  <Warning Timestamp="2014-11-29T21:27:28" Importance="Medium" Text="&quot;ModelingProject1::IRepository&quot; -  (Interface): нет привязанных шаблонов." />
+  <Warning Timestamp="2014-11-29T21:27:28" Importance="Medium" Text="&quot;ModelingProject1::BaseViewModel : INPC&quot; -  (Class): нет привязанных шаблонов." />
+  <Message Timestamp="2014-11-29T21:27:28" Importance="Diagnostic" Text="&quot;ModelingProject1::&quot; -  (InterfaceRealization): нет привязанных шаблонов." />
+  <Message Timestamp="2014-11-29T21:27:28" Importance="Diagnostic" Text="&quot;a6ec137e-c902-42bd-bf3c-ed399fab96b6&quot; -  (Generalization): нет привязанных шаблонов." />
+  <Warning Timestamp="2014-11-29T21:27:28" Importance="Medium" Text="&quot;ModelingProject1::RoomsRepository&quot; -  (Class): нет привязанных шаблонов." />
+  <Warning Timestamp="2014-11-29T21:27:28" Importance="Medium" Text="&quot;ModelingProject1::RoomsViewModel&quot; -  (Class): нет привязанных шаблонов." />
+  <Warning Timestamp="2014-11-29T21:27:28" Importance="Medium" Text="&quot;ModelingProject1::Class1&quot; -  (Class): нет привязанных шаблонов." />
+  <Warning Timestamp="2014-11-29T21:27:28" Importance="Medium" Text="&quot;ModelingProject1::Class2&quot; -  (Class): нет привязанных шаблонов." />
+  <Message Timestamp="2014-11-29T21:27:28" Importance="High" Text="Создание кода завершено. Ошибок: 1. Предупреждений: 6." />
+</Log>

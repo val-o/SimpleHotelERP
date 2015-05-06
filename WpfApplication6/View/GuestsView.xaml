@@ -1,0 +1,111 @@
+﻿<UserControl x:Class="Main.View.GuestsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:vm="clr-namespace:Main.ViewModel.EditViewModels"
+             xmlns:viewmodels="clr-namespace:Main.ViewModel"
+             xmlns:v="clr-namespace:Main.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="470" d:DesignWidth="740">
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type vm:GuestsEditViewModel}">
+            <v:GuestsEditView></v:GuestsEditView>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodels:ErrorViewModel}">
+            <v:ErrorView></v:ErrorView>
+        </DataTemplate>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"></BooleanToVisibilityConverter>
+        <DataTemplate DataType="{x:Type viewmodels:PeekWishesViewModel}">
+            <v:PeekWishesView></v:PeekWishesView>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+<Rectangle Fill="#FF4EB0FF"></Rectangle>
+        <TextBlock Style="{DynamicResource GuestsViewHeaderTextBlock}" Foreground="White">Список Постояльцев</TextBlock>
+        <ListView Name="ListView" Grid.Row="1" Grid.ColumnSpan="2"
+                      ItemsSource="{Binding Path=Collection}" 
+                      BorderThickness="2" 
+                      BorderBrush="#FF4EB0FF" SelectedItem="{Binding Path= CurrentEntityObject}" Grid.RowSpan="2">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="80" Header="Имя" DisplayMemberBinding="{Binding Path=Name}"></GridViewColumn>
+                    <GridViewColumn Width="80" Header="Фамилия" DisplayMemberBinding="{Binding Path=SecName}"></GridViewColumn>
+                    <GridViewColumn Width="80" Header="Отчество" DisplayMemberBinding="{Binding Path=ThirdName}"></GridViewColumn>
+                    <GridViewColumn Width="80" Header="Адрес" DisplayMemberBinding="{Binding Path=Address}" />
+                    <GridViewColumn Width="120" Header="Номер Паспорта" DisplayMemberBinding="{Binding Path=PassportData}" />
+                    <GridViewColumn Width="100" Header="Телефон" DisplayMemberBinding="{Binding Path=PhoneNumber}" />
+                    <GridViewColumn Header="Скидка">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <ListView IsEnabled="False" ItemsSource="{Binding Path = GuestsDiscounts}">
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Path = .Discounts.DiscountTitle}"></TextBlock>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="120" Header="Отзывов"  >
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Path= Wishes.Count}" ></TextBlock>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="История" >
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <ListView ItemsSource="{Binding Path=Registration}">
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel>
+                                                <StackPanel Orientation="Horizontal">
+                                                 <TextBlock  Text="{Binding Path =EntryDate, StringFormat=D, ConverterCulture=ru-RU}"></TextBlock>
+                                                 <TextBlock Text=" - "></TextBlock>
+                                                    <TextBlock  Text="{Binding Path =ExitDate, StringFormat=D, ConverterCulture=ru-RU}"></TextBlock>
+                                              </StackPanel>
+                                                <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="Номер Проживания: "></TextBlock>
+                                                <TextBlock Text="{Binding Path=Rooms.RoomNum}"></TextBlock>
+                                                </StackPanel>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Popup Placement="Center" IsOpen="True" AllowsTransparency="True">
+            <ContentControl Content="{Binding WishesViewModel}"></ContentControl>
+        </Popup>
+        <ContentControl Grid.Row="2" Content="{Binding ErrorViewModel}"></ContentControl>
+        <!-- Helper -->
+        <ContentControl Grid.Row="2"  Grid.Column="0" Content="{Binding Path=EditViewModelInstance}" Margin="5"></ContentControl>
+        <!-- Footer -->
+        <Grid Grid.Row="3" Margin="0" Background="#FF4EB0FF">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Button Margin="5,10" IsEnabled="{Binding Path=IsAddAndEditButtonsEnabled}" Command ="{Binding Path=EditClickedCommand}" Grid.Column="0" FontFamily="Lucida Sans Unci" FontSize="16" Style="{DynamicResource EditButton}" Foreground="White">Измененить</Button>
+            <Button Margin="5,10" IsEnabled="{Binding Path=IsAddAndEditButtonsEnabled}" Command ="{Binding Path=DeleteClickedCommand}" Grid.Column="1" FontFamily="Lucida Sans Unci" FontSize="16" Style="{DynamicResource DeleteButtonStyle}" Foreground="White">Удалить</Button>
+            <Button Margin="5,10" IsEnabled="{Binding Path=IsAddAndEditButtonsEnabled}" Command="{Binding Path= ShowPeekWishesCommand}" Content="Отзывы" Grid.Column="2" Style="{DynamicResource ShowButtonStyle}" FontSize="16" FontFamily="Lucida Sans Unci" Foreground="White"></Button>
+        </Grid>
+    </Grid>
+</UserControl>

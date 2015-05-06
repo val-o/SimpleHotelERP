@@ -1,0 +1,89 @@
+﻿<UserControl x:Class="Main.View.ServicesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:editViewModels="clr-namespace:Main.ViewModel.EditViewModels"
+             xmlns:view="clr-namespace:Main.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="470" d:DesignWidth="740">
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type editViewModels:ServicesEditViewModel}">
+            <view:ServicesEditView></view:ServicesEditView>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type editViewModels:RealizationEditViewModel}">
+            <view:RealizationEditView></view:RealizationEditView>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1.5*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        
+       <Rectangle Grid.ColumnSpan="2" Fill="#FF76C2FF" StrokeThickness="0"></Rectangle>
+
+        <TextBlock Style="{DynamicResource LucidaWhite14TextBlockStyle}" FontSize="18" >Список оказанных услуг</TextBlock>
+        <TextBlock Grid.Column="1" Style="{DynamicResource LucidaWhite14TextBlockStyle}" FontSize="18" >Список услуг</TextBlock>
+        <ListView   Name="ListView" Grid.Row="1" Grid.ColumnSpan="1"
+                      ItemsSource="{Binding Path=RealizationCollection}" 
+                      BorderThickness="2" 
+                      BorderBrush="#FF4EB0FF" SelectedItem="{Binding Path= CurrentRealization}" Grid.RowSpan="2">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="80" Header="Имя" DisplayMemberBinding="{Binding Path=Guests.Name}"></GridViewColumn>
+                    <GridViewColumn Width="80" Header="Фамилия" DisplayMemberBinding="{Binding Path=Guests.SecName}"></GridViewColumn>
+                    <GridViewColumn Width="80" Header="Дата Оказания" DisplayMemberBinding="{Binding Path=RealizationDate, StringFormat=D, ConverterCulture=ru-RU}" />
+                    <GridViewColumn Width="100" Header="Услуга" DisplayMemberBinding="{Binding Path=Services.ServiceTitle}" />
+                    <GridViewColumn Width="100" Header="Стоимость" DisplayMemberBinding="{Binding Path=Services.ServiceCost, StringFormat=C, ConverterCulture=ru-RU}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <ListView Grid.Row="1" Grid.Column="1"
+                      ItemsSource="{Binding Path=ServicesCollection}" 
+                      BorderThickness="2" 
+                      BorderBrush="#FF4EB0FF" SelectedItem="{Binding Path= CurrentService}" Grid.RowSpan="2">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="100" Header="Услуга" DisplayMemberBinding="{Binding Path=ServiceTitle}" />
+                    <GridViewColumn Width="100" Header="Стоимость" DisplayMemberBinding="{Binding Path=ServiceCost, StringFormat=C, ConverterCulture=ru-RU}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <Grid Grid.Column="1" Grid.Row="3" Background="#FF4EB0FF">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Button IsEnabled="{Binding Path =  ServiceAddButtonEnablence}"  Margin="10,15" Command="{Binding Path=AddServiceCommand}" Style="{DynamicResource AddButtonStyle}" Foreground="White">Добавить</Button>
+            <Button IsEnabled="{Binding Path =  ServiceControlButtonEnablence}"  Margin="10,15" Grid.Column="1" Command="{Binding Path=EditServiceCommand}" Style="{DynamicResource EditButton}" Foreground="White">Изменить</Button>
+            <Button IsEnabled="{Binding Path =  ServiceControlButtonEnablence}"  Margin="10,15" Grid.Column="2" Command="{Binding Path=DeleteServiceCommand}" Style="{DynamicResource DeleteButtonStyle}" Foreground="White">Удалить</Button>
+        </Grid>
+
+        <Grid Grid.Column="0" Grid.Row="3" Background="#FF4EB0FF" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Button IsEnabled="{Binding Path =  ServiceAddButtonEnablence}"  Margin="10,15" Command="{Binding Path=AddRealizationCommand}" Style="{DynamicResource AddButtonStyle}" FontFamily="Lucida Sans Unicode" FontSize="16" Foreground="White">Добавить</Button>
+            <Button IsEnabled="{Binding Path =  RealizationControlButtonEnablence}"  Margin="10,15" Grid.Column="1" Command="{Binding Path=DeleteRealizationCommand}" Style="{DynamicResource DeleteButtonStyle}" Foreground="White" FontFamily="Lucida Sans Unicode" FontSize="16">Удалить</Button>
+        </Grid>
+
+        <ContentControl Content="{Binding Path=ServicesEditViewModel}" Grid.Column="1" Grid.Row="2" >
+        </ContentControl>
+
+        <ContentControl Content="{Binding Path=RealizationEditViewModel}" Grid.Column="0" Grid.Row="2" >
+        </ContentControl>
+    </Grid>
+</UserControl>

@@ -1,0 +1,86 @@
+﻿<UserControl x:Class="Main.View.PaymentsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:vm="clr-namespace:Main.ViewModel.EditViewModels"
+             xmlns:v="clr-namespace:Main.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="470" d:DesignWidth="740">
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type vm:PaymentsEditViewModel}">
+            <v:PaymentsEditView></v:PaymentsEditView>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="4*" ></RowDefinition>
+            <RowDefinition Height="4*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Rectangle Grid.ColumnSpan="2" StrokeThickness="0" Fill="#FF4EB0FF" Margin="0,0,0,187.5" Grid.RowSpan="2"></Rectangle>
+        <TextBlock Style="{DynamicResource LucidaWhite14TextBlockStyle}" FontSize="18" Margin="124,10,123,9">Список оплат</TextBlock>
+        <TextBlock Grid.Column="1" Style="{DynamicResource LucidaWhite14TextBlockStyle}" FontSize="18" Margin="75,10,75,9">Список задолженностей</TextBlock>
+        <ListView Grid.Column="0" ItemsSource="{Binding Path=Collection}" 
+                  SelectedItem="{Binding Path=CurrentEntityObject, UpdateSourceTrigger=PropertyChanged}" BorderBrush="#FF4EB0FF" BorderThickness="2" Grid.Row="1" Grid.RowSpan="2">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Плательщик" DisplayMemberBinding="{Binding Path=Guests.Name}"></GridViewColumn>
+                    <GridViewColumn Header="Размер платежа" DisplayMemberBinding="{Binding Path=PaymentSize, StringFormat=c, ConverterCulture=ru-RU}"></GridViewColumn>
+                    <GridViewColumn Header="Дата оплаты" DisplayMemberBinding="{Binding Path = PaymentDate, StringFormat=D, ConverterCulture=ru-RU}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <ListView Grid.Column="1"  ItemsSource="{Binding Path=PaymentsViewCollection}" 
+                  SelectedItem="{Binding Path=CurrentEntityObj, UpdateSourceTrigger=PropertyChanged}" FontFamily="Lucida Sans Unicode" Foreground="Black" BorderBrush="#FF4EB0FF"  BorderThickness="2" Grid.Row="1" Grid.RowSpan="2">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn  Header="Постоялец"  >
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Path = SecName}" FontWeight="Bold"></TextBlock>
+                                    <TextBlock Text=" "></TextBlock>
+                                    <TextBlock Text="{Binding Path = Name}"></TextBlock>
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn Header= "Проживание" DisplayMemberBinding="{Binding Path=RentCost, StringFormat=c, ConverterCulture=ru-RU}"></GridViewColumn>
+                    <GridViewColumn Header= "Услуги" DisplayMemberBinding="{Binding Path=ServicesTotalCost, StringFormat=c, ConverterCulture=ru-RU}"></GridViewColumn>
+                    <GridViewColumn Header= "Общий счет" DisplayMemberBinding="{Binding Path=TotalDebt, StringFormat=c, ConverterCulture=ru-RU}"></GridViewColumn>
+                    <GridViewColumn  Header="Долг"  >
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Path = Debt, StringFormat=c, ConverterCulture=ru-RU}" Foreground="#FFFF6E6E" FontWeight="Bold"></TextBlock>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <!-- Footer -->
+        <Grid Grid.Row="3" Grid.ColumnSpan="2" Grid.Column="0" Background="#FF4EB0FF">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Button Margin="5" IsEnabled="{Binding Path=IsAddAndEditButtonsEnabled}" Command="{Binding Path=AddClickedCommand}" Style="{DynamicResource AddButtonStyle}">Добавить</Button>
+            <Button Margin="5" IsEnabled="{Binding Path=IsAddAndEditButtonsEnabled}" Command ="{Binding Path=DeleteClickedCommand}" Grid.Column="1" Style="{DynamicResource DeleteButtonStyle}">Удалить</Button>
+            <Button Margin="5" Command ="{Binding Path=CreateReportCommand}" Grid.Column="2" Style="{DynamicResource ShowButtonStyle}">Создать отчет</Button>
+        </Grid>
+        <ContentControl Grid.ColumnSpan="2" Grid.Row="2" Content="{Binding Path=EditViewModelInstance}" ></ContentControl>
+    </Grid>
+</UserControl>
